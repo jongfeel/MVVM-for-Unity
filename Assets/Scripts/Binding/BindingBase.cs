@@ -11,16 +11,15 @@ namespace Assets.Scripts.Binding
         [Helper.ReadOnly]
         public UnityEngine.Component Source;
         [SerializeField]
-        private string Path;
+        private string Path = null;
 
         public string PropertyName
         {
             get
             {
                 string path = Path;
-
-                int pointIndex = path.IndexOf(".");
-                if (pointIndex > -1)
+                
+                if (path.IndexOf(".") > -1)
                 {
                     // ex) Monster.Name
                     // PropertyName=Monster
@@ -41,30 +40,22 @@ namespace Assets.Scripts.Binding
         {
             get
             {
-                if (PropertyInfo != null)
-                {
-                    return PropertyInfo.GetValue(Source, null);
-                }
-
-                return null;
+                return PropertyInfo?.GetValue(Source, null);
             }
             set
             {
-                if (PropertyInfo != null)
+                object setValue = value;
+                if (setValue != null && !string.IsNullOrEmpty(SubPropertyName))
                 {
-                    object setValue = value;
-                    if (setValue != null && !string.IsNullOrEmpty(SubPropertyName))
+                    Type t = value.GetType();
+                    PropertyInfo pi = t.GetProperty(SubPropertyName);
+                    if (pi != null)
                     {
-                        Type t = value.GetType();
-                        PropertyInfo pi = t.GetProperty(SubPropertyName);
-                        if (pi != null)
-                        {
-                            setValue = pi.GetValue(value, null);
-                        }
+                        setValue = pi.GetValue(value, null);
                     }
-                    
-                    PropertyInfo.SetValue(Source, setValue, null);
                 }
+
+                PropertyInfo?.SetValue(Source, setValue, null);
             }
         }
 
@@ -104,10 +95,7 @@ namespace Assets.Scripts.Binding
             if (!value.Equals(updatedValue))
             {
                 value = updatedValue;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(Path));
-                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Path));
             }
         }
     }

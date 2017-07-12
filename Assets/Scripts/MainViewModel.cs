@@ -23,10 +23,7 @@ namespace Assets.Scripts
                 if (value1 != value)
                 {
                     value1 = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Value1"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Value1"));
                 }
             }
         }
@@ -43,10 +40,7 @@ namespace Assets.Scripts
                 if (name != value)
                 {
                     name = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Name"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
                 }
             }
         }
@@ -68,10 +62,7 @@ namespace Assets.Scripts
                 if (testText != value)
                 {
                     testText = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("TestText"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TestText"));
                 }
             }
         }
@@ -88,10 +79,7 @@ namespace Assets.Scripts
                 if (currentDateTime != value)
                 {
                     currentDateTime = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("CurrentDateTime"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentDateTime"));
                 }
             }
         }
@@ -108,10 +96,7 @@ namespace Assets.Scripts
                 if (currnetDateTimeClick != value)
                 {
                     currnetDateTimeClick = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("CurrnetDateTimeClick"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrnetDateTimeClick"));
                 }
             }
         }
@@ -128,10 +113,7 @@ namespace Assets.Scripts
                 if (inputText != value)
                 {
                     inputText = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("InputText"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("InputText"));
                 }
             }
         }
@@ -148,10 +130,7 @@ namespace Assets.Scripts
                 if (test1 != value)
                 {
                     test1 = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Test1"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Test1"));
                 }
             }
         }
@@ -168,10 +147,7 @@ namespace Assets.Scripts
                 if (test2 != value)
                 {
                     test2 = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("Test2"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Test2"));
                 }
             }
         }
@@ -188,10 +164,7 @@ namespace Assets.Scripts
                 if (buttonIsEnabled != value)
                 {
                     buttonIsEnabled = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ButtonIsEnabled"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ButtonIsEnabled"));
                 }
             }
         }
@@ -208,10 +181,7 @@ namespace Assets.Scripts
                 if (toggleIsOn != value)
                 {
                     toggleIsOn = value;
-                    if (PropertyChanged != null)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs("ToggleIsOn"));
-                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ToggleIsOn"));
 
                     if (toggleIsOn)
                     {
@@ -223,11 +193,6 @@ namespace Assets.Scripts
                     }
                 }
             }
-        }
-
-        public void Click()
-        {
-            
         }
 
         // Use this for initialization

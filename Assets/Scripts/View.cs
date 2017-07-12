@@ -17,43 +17,32 @@ namespace Assets.Scripts
 
         private List<PropertyNameValuePair<string, object>> PropertyNameValuePairList = new List<PropertyNameValuePair<string, object>>();
         private List<BindingBase> ViewBindingList = new List<BindingBase>();
-        private INotifyPropertyChanged viewModel;
+        private INotifyPropertyChanged[] viewModels;
 
         private void Start()
         {
-            if (DataContext != null)
+            viewModels = DataContext?.GetComponents<INotifyPropertyChanged>();
+            foreach (var viewModel in viewModels)
             {
-                viewModel = DataContext.GetComponent<INotifyPropertyChanged>();
-                if (viewModel != null)
-                {
-                    GetProperties(viewModel);   
-                    viewModel.PropertyChanged += ViewModel_PropertyChanged;
-                }
-                else
-                {
-                    Debug.LogError("ViewModel did not inherit INotifyPropertyChanged.");
-                }
+                GetProperties(viewModel);
+                viewModel.PropertyChanged += ViewModel_PropertyChanged;
             }
-            else
-            {
-                Debug.LogError("DataContext is null.");
-            }
-
+            
             FindAllBindingComponents(transform);
         }
 
         private void OnDestroy()
         {
-            if (viewModel != null)
+            foreach (var viewModel in viewModels)
             {
                 viewModel.PropertyChanged -= ViewModel_PropertyChanged;
             }
 
-            for (int i = 0; i < ViewBindingList.Count; i++)
+            foreach (var viewBinding in ViewBindingList)
             {
-                ViewBindingList[i].PropertyChanged -= ViewBinding_PropertyChanged;
+                viewBinding.PropertyChanged -= ViewBinding_PropertyChanged;
             }
-
+            
             ViewBindingList.Clear();
         }
 
@@ -75,12 +64,12 @@ namespace Assets.Scripts
 
             #region Register property name and value
             PropertyInfo[] infos = sender.GetType().GetProperties();
-            for (int i = 0; i < infos.Length; i++)
+            foreach (var propertyInfo in infos)
             {
-                if (infos[i].DeclaringType == sender.GetType())
+                if (propertyInfo.DeclaringType == sender.GetType())
                 {
-                    string name = infos[i].Name;
-                    object value = infos[i].GetValue(sender, null);
+                    string name = propertyInfo.Name;
+                    object value = propertyInfo.GetValue(sender, null);
 
                     var findItem = PropertyNameValuePairList.Find(item => item.Key == name);
                     if (findItem == null)
@@ -125,7 +114,7 @@ namespace Assets.Scripts
                     #endregion
 
                     #region Change view value
-                    for (int i = 0; i < findBindings.Count; i++)
+                    foreach (var findBinding in findBindings)
                     {
                         object value = pi.GetValue(sender, null);
                         INotifyPropertyChanged inpc = value as INotifyPropertyChanged;
@@ -134,7 +123,7 @@ namespace Assets.Scripts
                             inpc.PropertyChanged -= ViewModel_PropertyChanged;
                             inpc.PropertyChanged += ViewModel_PropertyChanged;
                         }
-                        findBindings[i].Value = value;
+                        findBinding.Value = value;
                     }
                     #endregion
                 }
@@ -151,29 +140,24 @@ namespace Assets.Scripts
 
         private void FindAllBindingComponents(Transform transform)
         {
-            for (int i = 0; i < transform.childCount; i++)
+            foreach (Transform childTransform in transform)
             {
-                Transform t = transform.GetChild(i);
-
                 #region Register BindingBase type and PropertyChanged event handler
-                BindingBase[] viewBindings = t.GetComponents<BindingBase>();
-                if (viewBindings != null)
+                BindingBase[] viewBindings = childTransform.GetComponents<BindingBase>();
+                foreach (var viewBinding in viewBindings)
                 {
-                    for (int j = 0; j < viewBindings.Length; j++)
-                    {
-                        viewBindings[j].PropertyChanged += ViewBinding_PropertyChanged;
-                        ViewBindingList.Add(viewBindings[j]);
-                    }
+                    viewBinding.PropertyChanged += ViewBinding_PropertyChanged;
+                    ViewBindingList.Add(viewBinding);
                 }
                 #endregion
 
-                FindAllBindingComponents(t);
+                FindAllBindingComponents(childTransform);
             }
         }
 
         private void ViewBinding_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (viewModel != null)
+            foreach (var viewModel in viewModels)
             {
                 Type type = viewModel.GetType();
                 PropertyInfo pi = type.GetProperty(e.PropertyName);
