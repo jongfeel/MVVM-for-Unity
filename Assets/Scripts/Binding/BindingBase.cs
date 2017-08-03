@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 
 namespace Assets.Scripts.Binding
@@ -80,7 +81,9 @@ namespace Assets.Scripts.Binding
             }
             else
             {
-                Debug.LogError("Component not found.");
+                Highlighter.Highlight("Hierarchy", gameObject.name);
+                EditorGUIUtility.PingObject(gameObject);
+                Debug.LogError(string.Format("Component not found, gameObject.name={0}, Property={1}, Path={2}", gameObject.name, propertyName, Path));
             }
         }
 
@@ -92,7 +95,8 @@ namespace Assets.Scripts.Binding
         protected virtual void OnGUI()
         {
             object updatedValue = Value;
-            if (!value.Equals(updatedValue))
+
+            if (value?.Equals(updatedValue) == false)
             {
                 value = updatedValue;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Path));

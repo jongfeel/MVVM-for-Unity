@@ -178,14 +178,8 @@ namespace Assets.Scripts
                         if (subPI != null)
                         {
                             object propertyValue = subPI.GetValue(viewModel, null);
-                            if (propertyValue != null)
-                            {
-                                PropertyInfo subPI2 = propertyValue.GetType().GetProperty(subPropertyName);
-                                if (subPI2 != null)
-                                {
-                                    subPI2.SetValue(propertyValue, (sender as BindingBase).Value, null);
-                                }
-                            }
+                            PropertyInfo subPI2 = propertyValue?.GetType().GetProperty(subPropertyName);
+                            subPI2?.SetValue(propertyValue, (sender as BindingBase).Value, null);
                         }
                     }
                 }
