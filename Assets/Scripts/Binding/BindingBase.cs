@@ -83,7 +83,7 @@ namespace Assets.Scripts.Binding
             {
                 Highlighter.Highlight("Hierarchy", gameObject.name);
                 EditorGUIUtility.PingObject(gameObject);
-                Debug.LogError(string.Format("Component not found, gameObject.name={0}, Property={1}, Path={2}", gameObject.name, propertyName, Path));
+                Debug.LogError($"Component not found, gameObject.name={gameObject.name}, Property={propertyName}, Path={Path}");
             }
         }
 
