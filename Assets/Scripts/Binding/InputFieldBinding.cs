@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Binding
 {
-    public class InputFieldBinding : BindingBase
+    public class InputFieldBinding : ViewBinderBase
     {
         public InputFieldProperty Property;
 

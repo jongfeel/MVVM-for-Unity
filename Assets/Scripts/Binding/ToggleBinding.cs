@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Binding
 {
-    public class ToggleBinding : BindingBase
+    public class ToggleBinding : ViewBinderBase
     {
         public ToggleProperty Property;
 

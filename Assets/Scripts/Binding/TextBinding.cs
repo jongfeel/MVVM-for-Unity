@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Binding
 {
-    public class TextBinding : BindingBase
+    public class TextBinding : ViewBinderBase
     {
         public TextProperty Property;
 

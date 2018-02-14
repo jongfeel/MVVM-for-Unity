@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Enums;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Enums;
 using Assets.Scripts.Helper;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,15 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Binding
 {
-    public class ButtonBinding : BindingBase
+    public class ButtonViewBinder : ViewBinderBase
     {
-        public ButtonProperty Command;
+        public ButtonProperty Property;
+        public List<ButtonBinding> Binding;
 
         protected override void Start()
         {
             Source = GetComponent<Button>();
-            SetPropertyInfo(Command.ToString());
+            SetPropertyInfo(Property.ToString());
             
             base.Start();
         }

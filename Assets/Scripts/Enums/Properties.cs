@@ -12,7 +12,7 @@ namespace Assets.Scripts.Enums
         fontSize,
         fontStyle
     }
-
+    
     public enum ButtonProperty
     {
         onClick,
