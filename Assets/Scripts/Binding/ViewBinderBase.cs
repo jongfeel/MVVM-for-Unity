@@ -6,17 +6,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace Assets.Scripts.Binding
 {
-    public abstract class ViewBinderBase : MonoBehaviour, INotifyPropertyChanged
+    public class ViewBinderBase : MonoBehaviour, INotifyPropertyChanged
     {
         [Helper.ReadOnly]
         public UnityEngine.Component Source;
+        [ComponentProperty]
+        public string BindingProperty;
         [SerializeField]
         private string Path = null;
 
@@ -83,14 +89,31 @@ namespace Assets.Scripts.Binding
             }
             else
             {
+#if UNITY_EDITOR
                 Highlighter.Highlight("Hierarchy", gameObject.name);
                 EditorGUIUtility.PingObject(gameObject);
                 Debug.LogError($"Component not found, gameObject.name={gameObject.name}, Property={propertyName}, Path={Path}");
+#endif
             }
         }
 
         protected virtual void Start()
-        {
+        {            
+            Source = GetComponent<Text>();
+            if (Source == null)
+            {
+                Source = GetComponent<Toggle>();
+            }
+            if (Source == null)
+            {
+                Source = GetComponent<InputField>();
+            }
+            if (Source == null)
+            {
+                Source = GetComponent<Button>();
+            }
+
+            SetPropertyInfo(BindingProperty);
             value = Value;
         }
 

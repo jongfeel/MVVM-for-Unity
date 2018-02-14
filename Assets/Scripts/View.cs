@@ -33,9 +33,12 @@ namespace Assets.Scripts
 
         private void OnDestroy()
         {
-            foreach (var viewModel in viewModels)
+            if (viewModels != null)
             {
-                viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                foreach (var viewModel in viewModels)
+                {
+                    viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                }
             }
 
             foreach (var viewBinding in ViewBindingList)

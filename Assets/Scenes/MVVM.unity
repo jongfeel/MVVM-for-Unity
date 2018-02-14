@@ -490,13 +490,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 124976988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: InputText
-  Property: 0
 --- !u!114 &124976991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +546,7 @@ GameObject:
   - component: {fileID: 149537940}
   - component: {fileID: 149537941}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: ToggleTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,13 +625,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 149537938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca449f2438a9f5148820a3d3cdca872e, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: isOn
   Path: ToggleIsOn
-  Property: 0
 --- !u!1 &197761293
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,13 +675,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 197761293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: Test1.Name
-  Property: 0
 --- !u!114 &197761296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,17 +842,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 209589497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69bb8ac0bb0083c428d75919c4fe1118, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding:
-  - Path: CurrnetDateTimeClick
-    Property: 0
-  - Path: ButtonIsEnabled
-    Property: 1
+  BindingProperty: onClick
   Path: CurrnetDateTimeClick
-  Property: 0
 --- !u!114 &209589503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,28 +856,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 209589497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69bb8ac0bb0083c428d75919c4fe1118, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: enabled
   Path: ButtonIsEnabled
-  Property: 1
 --- !u!114 &209589504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 209589497}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: onClick
   Path: 
-  Property: 0
 --- !u!1 &412220678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,13 +1379,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 640083290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 739b31b53ae0eba4391cbaf44089c2bf, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: InputText
-  Property: 0
 --- !u!1 &714145624
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,13 +1429,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 714145624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: Test1.Name
-  Property: 0
 --- !u!114 &714145627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1643,13 +1631,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1160810802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: CurrentDateTime
-  Property: 0
 --- !u!1 &1179124678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,13 +1903,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1349721078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: Test2.Name
-  Property: 0
 --- !u!114 &1349721081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,13 +2676,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1819619585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: Test1.Value1
-  Property: 2
 --- !u!114 &1819619588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,13 +2827,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1832981193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: Test2.Value1
-  Property: 2
 --- !u!114 &1832981196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2932,13 +2916,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1839405182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8e3742ef107760409f181f5e791f3dc, type: 3}
+  m_Script: {fileID: 11500000, guid: aa94e27ee79d1c44ca1a8698852dbc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 0}
-  Binding: []
+  BindingProperty: text
   Path: TestText
-  Property: 0
 --- !u!114 &1839405185
 MonoBehaviour:
   m_ObjectHideFlags: 0
