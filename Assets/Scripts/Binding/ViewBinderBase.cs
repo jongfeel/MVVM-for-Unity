@@ -1,16 +1,28 @@
-﻿using Assets.Scripts.Helper;
+﻿using Assets.Scripts.Data;
+using Assets.Scripts.Enums;
+using Assets.Scripts.Helper;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
-using UnityEditor;
+
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Assets.Scripts.Binding
 {
-    public abstract class BindingBase : MonoBehaviour, INotifyPropertyChanged
+    public class ViewBinderBase : MonoBehaviour, INotifyPropertyChanged
     {
         [Helper.ReadOnly]
         public UnityEngine.Component Source;
+        [ComponentProperty]
+        public string BindingProperty;
         [SerializeField]
         private string Path = null;
 
@@ -19,7 +31,7 @@ namespace Assets.Scripts.Binding
             get
             {
                 string path = Path;
-                
+
                 if (path.IndexOf(".") > -1)
                 {
                     // ex) Monster.Name
@@ -49,11 +61,7 @@ namespace Assets.Scripts.Binding
                 if (setValue != null && !string.IsNullOrEmpty(SubPropertyName))
                 {
                     Type t = value.GetType();
-                    PropertyInfo pi = t.GetProperty(SubPropertyName);
-                    if (pi != null)
-                    {
-                        setValue = pi.GetValue(value, null);
-                    }
+                    setValue = t.GetProperty(SubPropertyName)?.GetValue(value, null);
                 }
 
                 PropertyInfo?.SetValue(Source, setValue, null);
@@ -81,14 +89,31 @@ namespace Assets.Scripts.Binding
             }
             else
             {
+#if UNITY_EDITOR
                 Highlighter.Highlight("Hierarchy", gameObject.name);
                 EditorGUIUtility.PingObject(gameObject);
                 Debug.LogError($"Component not found, gameObject.name={gameObject.name}, Property={propertyName}, Path={Path}");
+#endif
             }
         }
 
         protected virtual void Start()
-        {
+        {            
+            Source = GetComponent<Text>();
+            if (Source == null)
+            {
+                Source = GetComponent<Toggle>();
+            }
+            if (Source == null)
+            {
+                Source = GetComponent<InputField>();
+            }
+            if (Source == null)
+            {
+                Source = GetComponent<Button>();
+            }
+
+            SetPropertyInfo(BindingProperty);
             value = Value;
         }
 

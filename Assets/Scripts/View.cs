@@ -16,7 +16,7 @@ namespace Assets.Scripts
         public GameObject DataContext;
 
         private List<PropertyNameValuePair<string, object>> PropertyNameValuePairList = new List<PropertyNameValuePair<string, object>>();
-        private List<BindingBase> ViewBindingList = new List<BindingBase>();
+        private List<ViewBinderBase> ViewBindingList = new List<ViewBinderBase>();
         private INotifyPropertyChanged[] viewModels;
 
         private void Start()
@@ -33,9 +33,12 @@ namespace Assets.Scripts
 
         private void OnDestroy()
         {
-            foreach (var viewModel in viewModels)
+            if (viewModels != null)
             {
-                viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                foreach (var viewModel in viewModels)
+                {
+                    viewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                }
             }
 
             foreach (var viewBinding in ViewBindingList)
@@ -102,7 +105,7 @@ namespace Assets.Scripts
                     #endregion
 
                     #region Get view bindings of property name
-                    List<BindingBase> findBindings = ViewBindingList.FindAll(find => find.PropertyName == e.PropertyName);
+                    List<ViewBinderBase> findBindings = ViewBindingList.FindAll(find => find.PropertyName == e.PropertyName);
                     if (findBindings.Count == 0)
                     {
                         var findItem = PropertyNameValuePairList.Find(item => item.Value == sender);
@@ -143,7 +146,7 @@ namespace Assets.Scripts
             foreach (Transform childTransform in transform)
             {
                 #region Register BindingBase type and PropertyChanged event handler
-                BindingBase[] viewBindings = childTransform.GetComponents<BindingBase>();
+                ViewBinderBase[] viewBindings = childTransform.GetComponents<ViewBinderBase>();
                 foreach (var viewBinding in viewBindings)
                 {
                     viewBinding.PropertyChanged += ViewBinding_PropertyChanged;
@@ -163,7 +166,7 @@ namespace Assets.Scripts
                 PropertyInfo pi = type.GetProperty(e.PropertyName);
                 if (pi != null)
                 {
-                    pi.SetValue(viewModel, (sender as BindingBase).Value, null);
+                    pi.SetValue(viewModel, (sender as ViewBinderBase).Value, null);
                 }
                 else
                 {
@@ -179,7 +182,7 @@ namespace Assets.Scripts
                         {
                             object propertyValue = subPI.GetValue(viewModel, null);
                             PropertyInfo subPI2 = propertyValue?.GetType().GetProperty(subPropertyName);
-                            subPI2?.SetValue(propertyValue, (sender as BindingBase).Value, null);
+                            subPI2?.SetValue(propertyValue, (sender as ViewBinderBase).Value, null);
                         }
                     }
                 }
